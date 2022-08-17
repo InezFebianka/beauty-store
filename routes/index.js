@@ -1,0 +1,20 @@
+const router = require('express').Router()
+const express = require('express')
+const Controller = require('../controllers/controller')
+router.use(express.urlencoded({extended:true}))
+
+router.get('/', Controller.index)
+router.get('/regis', Controller.formRegis)
+router.post('/regis', Controller.createRegis)
+router.get('/login', Controller.formLogin)
+router.post('/login', Controller.createLogin)
+router.get('/user/:userid/profile', Controller.formProfile)
+router.post('/user/:userid/profile', Controller.createProfile)
+router.get('/product', Controller.showProduct)
+router.get('/product/category/:categoryid', Controller.productCategoryId)
+router.get('/product/user/:userId', Controller.productUserId)
+router.get('/addProduct', Controller.formAddProduct)
+router.post('/addProduct', Controller.createProduct)
+router.get('/deleteProduct', Controller.deleteProduct)
+
+module.exports = router
