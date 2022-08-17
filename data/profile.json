@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Asep Jaenal",
+    "phone_number": "081363367575",
+    "nik": 12002,
+    "age": 32,
+    "UserId": 1
+  },
+  {
+    "name": "Lilis Mawar",
+    "phone_number": "08978253999",
+    "nik": 99060,
+    "age": 21,
+    "UserId": 2
+  }
+]

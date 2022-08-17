@@ -1,0 +1,14 @@
+[
+  {
+    "username": "user123",
+    "email": "number1@fmail.com",
+    "password": "numberoneuser",
+    "role": "admin"
+  },
+  {
+    "username": "wakuwaku_store",
+    "email": "wakustore@fmail.com",
+    "password": "okidoki",
+    "role": "seller"
+  }
+]
