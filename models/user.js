@@ -12,10 +12,18 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasOne(models.Profile)
+      User.hasMany(models.Product)
     }
   }
   User.init({
-    username: DataTypes.STRING,
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true
+      }
+    },
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     role: DataTypes.STRING
