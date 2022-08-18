@@ -6,7 +6,8 @@ class Controller {
     res.render('index')
   }
   static formRegis(req, res) {
-    res.render('formRegis')
+    let error = req.query.error
+    res.render('formRegis', {error})
   }
   static createRegis(req, res) {
     let body = {
@@ -15,12 +16,20 @@ class Controller {
       password: req.body.password,
       role: req.body.role
     }
+    
     User.create(body)
       .then(result=>{
         res.redirect ('/login')
       })
       .catch(err=>{
-        res.send(err)
+        let error = []
+        if (err.name === 'SequelizeValidationError'){
+          err.errors.forEach(el=>{
+            error.push(el.message)
+          })
+                    
+        }
+        res.redirect(`/register?error=${error}`)
       })
   }
   static formLogin(req, res) {

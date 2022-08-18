@@ -1,5 +1,6 @@
 const {Category, Product, Profile, User } = require('../models')
 const {Op} = require('sequelize')
+const qrcode = require('qrcode')
 
 class ProductController{
     static showProduct(req, res) {
@@ -47,9 +48,14 @@ class ProductController{
         let targetedId = req.params.idProduct
         Product.findByPk(targetedId,{include:[User, Category]})
             .then(result=>{
-                res.render('productDetail', {result})
+                qrcode.toDataURL(`/productDetail/${targetedId}`, (err, src)=>{
+                    let qr_code = {source: src}
+                    res.render('productDetail', {result, qr_code})
+                })
+                
             })
             .catch(err=>{
+                console.log(err);
                 res.send(err)
             })
     }

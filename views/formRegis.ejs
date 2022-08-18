@@ -8,7 +8,9 @@
 </head>
 <body>
     <!-- NAVBAR -->
-
+    <%if (error){%>
+        <p style="color: red;"><%=error%></p>
+    <%}%>
 
     <!-- FORM -->
     <form action="/register" method="post">
