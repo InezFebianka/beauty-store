@@ -56,7 +56,7 @@ class Controller {
             return res.redirect(`/login?error=${error}`)
           }
         } else {
-          const error = 'user not found'
+          const error = 'Wrong Username and/or Email'
           return res.redirect(`/login?error=${error}`)
         }
       })
@@ -76,15 +76,48 @@ class Controller {
   }
 
   static profileShow(req, res) {
-    res.send('masuk e')
+    let userId = req.params.userid
+    let visitor = {
+      usename: req.session.userUsername,
+      id: req.session.userId,
+      role: req.session.userRole
+    }
+    Profile.findOne({where: {UserId:userId}})
+      .then(result=>{
+        res.render('profileView', {result, visitor, userId})
+      })
+      .catch(err=>{
+        res.send(err)
+      })
   }
 
   static formProfile(req, res) {
-    res.send('masuk e')
+    let visitor = {
+      usename: req.session.userUsername,
+      id: req.session.userId,
+      role: req.session.userRole
+    }
+    res.render('formProfile', {visitor})
   }
 
   static createProfile(req, res) {
-    res.send('masuk f')
+    let body = {
+      name: req.body.name,
+      phone_number: req.body.phone_number,
+      nik: req.body.nik,
+      age: req.body.age,
+      UserId: req.params.userid,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+
+    Profile.create(body)
+      .then(result=>{
+        res.redirect(`/user/${body.UserId}/profile`)
+      })
+      .catch(err=>{
+        res.send(err)
+      })
   }
   
 }

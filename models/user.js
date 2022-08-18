@@ -17,6 +17,14 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.Profile)
       User.hasMany(models.Product)
     }
+
+    static getAllSeller(){
+      return User.findAll({
+        where: {
+          role: 'seller'
+        }
+      })
+    }
   }
   User.init({
     username: {

@@ -1,10 +1,37 @@
 const {Category, Product, Profile, User } = require('../models')
+const {Op} = require('sequelize')
 
 class ProductController{
     static showProduct(req, res) {
-        Product.findAll()
+        let visitor = {
+            usename: req.session.userUsername,
+            id: req.session.userId,
+            role: req.session.userRole
+        }
+        let search = req.query.search
+        let filter = req.query.filter
+        let where = {}
+        if(search){
+            where.name = {
+                [Op.iLike]:`%${search}%`
+            }
+        }
+        if(filter){
+            where.UserId = +filter
+        }
+        Product.findAll({
+            include:[Category],
+            where       
+        })
             .then(result=>{
-                res.render('showProduct' , {result})
+                User.getAllSeller()
+                    .then(allSeller=>{
+                        res.render('showProduct' , {result, visitor, allSeller})
+                    })
+                    .catch(err=>{
+                        res.send(err)
+                    })
+                
             })
             .catch(err=>{
                 res.send(err)
@@ -12,6 +39,11 @@ class ProductController{
     }
 
     static detailProduct(req, res) {
+        let visitor = {
+            usename: req.session.userUsername,
+            id: req.session.userId,
+            role: req.session.userRole
+        }
         let targetedId = req.params.idProduct
         Product.findByPk(targetedId,{include:[User, Category]})
             .then(result=>{
@@ -21,23 +53,35 @@ class ProductController{
                 res.send(err)
             })
     }
-
-    static productCategoryId(req, res) {
-        res.send('masuk h')
-    }
-      
-    static productUserId(req, res) {
-        res.send('masuk i')
-    }
       
     static formAddProduct(req, res) {
-        Category.allCategory()
-            .then(result=>{
-                res.render('formAddProduct', {result})
+        let visitor = {
+            usename: req.session.userUsername,
+            id: req.session.userId,
+            role: req.session.userRole
+        }
+        Profile.findOne({
+            where: {
+                UserId: visitor.id
+            }
+        })
+            .then(hasProfile=>{
+                if(hasProfile.length !== 0){
+                    console.log(hasProfile);
+                   Category.allCategory()
+                    .then(result=>{
+                        res.render('formAddProduct', {result, visitor})
+                    })
+                    .catch(err=>{
+                        res.send(err)
+                    }) 
+                }
+                
             })
             .catch(err=>{
-                res.send(err)
+                res.redirect(`/user/${visitor.id}/profile`)
             })
+        
     }
       
     static createProduct(req, res) {
@@ -57,6 +101,7 @@ class ProductController{
                 res.redirect('/product')
             })
             .catch(err=>{
+                // console.log(err);
                 res.send(err)
             })
 
@@ -69,11 +114,12 @@ class ProductController{
                 // console.log(result);
                 Category.allCategory()
                     .then(allCat=>{
-                        res.render('formEditProduct', {result, allCat})
+                        User.getAllSeller()
+                            .then(allSeller=>{
+                                console.log(allSeller);
+                                res.render('formEditProduct', {result, allCat, allSeller})
                     })
-                    .catch(err=>{
-                        res.send(err)
-                    })
+                })     
             })
             .catch(err=>{
                 console.log(err);
@@ -83,10 +129,9 @@ class ProductController{
 
     static editProduct(req, res) {
         let targetedId = req.params.productId
-        let UserId = req.params.userid
         let body = {
             id:+targetedId,
-            UserId:+UserId,
+            UserId:+req.body.UserId,
             name:req.body.name,
             desc:req.body.desc,
             price:+req.body.price,
@@ -103,7 +148,7 @@ class ProductController{
                 res.redirect(`/productDetail/${targetedId}`)
             })
             .catch(err=>{
-                console.log(err);
+                // console.log(err);
                 res.send(err)
             })
 

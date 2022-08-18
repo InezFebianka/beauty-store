@@ -16,7 +16,7 @@
 
     <!-- FORM -->
 
-    <form action="/product/2/<%=result.id%>/editProduct" method="post">
+    <form action="/product/<%=result.id%>/editProduct" method="post">
         <div>
             <label for="name">Name</label>
             <input type="text" name="name" id="name" value="<%=result.name%>">
@@ -43,6 +43,18 @@
                         <option value="<%=el.id%>"><%=el.name%></option>
                     <%}%>
                     
+                <%})%>
+            </select>
+        </div>
+        <div>
+            <label for="UserId">Seller</label>
+            <select name="UserId" id="">
+                <%allSeller.forEach(el=>{%>
+                    <%if(el.id === result.UserId){%>
+                        <option value="<%= el.id %>" selected><%= el.username %></option>
+                    <%} else {%>
+                        <option value="<%= el.id %>"><%= el.username %></option>
+                    <%}%>
                 <%})%>
             </select>
         </div>

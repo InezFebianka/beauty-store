@@ -19,34 +19,60 @@
     <nav>
         <h1>Beauty Store</h1>
         <a href="/">Home</a>
-        <a href="/user/:userid/addProduct"><button>Add Product</button></a>
-        <a href="/user/:userid/profile"><button>Profile</button></a>
+        <a href="/user/<%=visitor.id%>/addProduct"><button>Add Product</button></a>
+        <a href="/user/<%=visitor.id%>/profile"><button>Profile</button></a>
         <a href="/logout">Log out</a>
     </nav>
 
+    <!-- Preference -->
+    <div>
+        <form action="/product" method="get">
+            <div>
+                <input type="text" name="search" id="" placeholder="Seach by product name">
+                <button type="submit">search</button>  
+            </div>
+        </form>
+
+
+        <form action="/product" method="get">
+            <div>
+                <select name="filter" id="">
+                    <option selected disabled>Filter by seller</option>
+                    <%allSeller.forEach(el=>{%>
+                        <option value="<%=el.id%>"><%=el.username%></option>
+                    <%})%>
+                </select>
+                <button type="submit">filter</button>
+            </div>
+        </form>
+    </div>
     <!-- TABLE PRODUCT -->
-    <table>
+    <%if(result.length !== 0){%>
+        <table>
         <thead>
             <tr>
-                <th>id</th>
+                <th>no</th>
                 <th>name</th>
                 <th>description</th>
                 <th>price</th>
                 <th>images</th>
+                <th>category</th>
                 <th>action</th>
             </tr>
         </thead>
         <tbody>
-            <%result.forEach(el=>{%>
+            <%result.forEach((el, idx)=>{%>
             <tr>
-                <td><%=el.id%></td>
+                <td><%=idx+1%></td>
                 <td><%=el.name%></td>
                 <td><%=el.desc%></td>
                 <td><%=el.formatPrice()%></td>
                 <td><img src="<%=el.imageUrl%>" alt="pic of <%=el.name%>"></td>
+                <td><%=el.Category.name%></td>
                 <td>
                     <a href="productDetail/<%=el.id%>"><button>See Detail</button></a>
                     <!-- action edit jika login as seller dengan user id match -->
+                    
                     <a href="/product/<%=el.id%>/editProduct"><button>Edit</button></a>
 
                     <!-- action delete jika login as admin -->
@@ -57,5 +83,9 @@
             
         </tbody>
     </table>
+    <%} else {%>
+        <p>Data tidak ditemukan</p>
+    <%}%>%>
+    
 </body>
 </html>

@@ -30,8 +30,6 @@ router.post('/user/:userid/formProfile', Controller.createProfile)
 
 router.get('/product', ProductController.showProduct)
 router.get('/productDetail/:idProduct', ProductController.detailProduct)
-router.get('/product/category/:categoryid', ProductController.productCategoryId)
-router.get('/product/user/:userId', ProductController.productUserId)
 
 //only seller when finish fill form profile
 router.get('/user/:userid/addProduct', ProductController.formAddProduct)
@@ -48,8 +46,8 @@ router.use(function(req, res, next){
     }
 })
 // only admin
-router.get('/product/:userid/:productId/editProduct', ProductController.formEditProduct)
-router.post('/product/:userid/:productId/editProduct', ProductController.editProduct)
+router.get('/product/:productId/editProduct', ProductController.formEditProduct)
+router.post('/product/:productId/editProduct', ProductController.editProduct)
 router.get('/product/:productId/deleteProduct', ProductController.deleteProduct)
 
 
