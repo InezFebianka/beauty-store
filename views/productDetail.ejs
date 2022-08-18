@@ -33,6 +33,7 @@
         <p>Price: <%=result.formatPrice()%></p>
         <p>Category: <%=result.Category.name%></p>
         
+        <p>THIS PAGE QR CODE: <img src="<%= qr_code.source %>" alt="QR CODE"></p>
         <a href="/user/<%=result.User.id%>/profile"><button>See Seller</button></a>
         
     </section>
