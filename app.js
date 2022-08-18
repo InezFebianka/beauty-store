@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 const router = require('./routes/index')
 const session = require('express-session')
-const QRCode = require('qrcode')
+const qrcode = require('qrcode')
 
 app.set('view engine', 'ejs')
 app.use(session({

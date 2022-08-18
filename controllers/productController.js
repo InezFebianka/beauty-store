@@ -5,7 +5,7 @@ const qrcode = require('qrcode')
 class ProductController{
     static showProduct(req, res) {
         let visitor = {
-            usename: req.session.userUsername,
+            username: req.session.userUsername,
             id: req.session.userId,
             role: req.session.userRole
         }
@@ -41,7 +41,7 @@ class ProductController{
 
     static detailProduct(req, res) {
         let visitor = {
-            usename: req.session.userUsername,
+            username: req.session.userUsername,
             id: req.session.userId,
             role: req.session.userRole
         }
@@ -62,7 +62,7 @@ class ProductController{
       
     static formAddProduct(req, res) {
         let visitor = {
-            usename: req.session.userUsername,
+            username: req.session.userUsername,
             id: req.session.userId,
             role: req.session.userRole
         }
@@ -73,7 +73,7 @@ class ProductController{
         })
             .then(hasProfile=>{
                 if(hasProfile.length !== 0){
-                    console.log(hasProfile);
+                    // console.log(hasProfile);
                    Category.allCategory()
                     .then(result=>{
                         res.render('formAddProduct', {result, visitor})
@@ -122,7 +122,7 @@ class ProductController{
                     .then(allCat=>{
                         User.getAllSeller()
                             .then(allSeller=>{
-                                console.log(allSeller);
+                                // console.log(allSeller);
                                 res.render('formEditProduct', {result, allCat, allSeller})
                     })
                 })     
@@ -144,7 +144,7 @@ class ProductController{
             CategoryId:req.body.CategoryId,
             imageUrl:req.body.imageUrl,
         }
-        console.log(body);
+        // console.log(body);
         Product.update(body, {
             where: {
                 id: targetedId
