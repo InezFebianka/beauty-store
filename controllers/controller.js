@@ -3,7 +3,17 @@ const bcrypt = require('bcryptjs')
 
 class Controller {
   static index(req, res) {
-    res.render('index')
+    let visitor = {
+      username: req.session.userUsername,
+      id: req.session.userId,
+      role: req.session.userRole
+    }
+    if(visitor.id){
+      res.redirect('/product')
+    } else {
+      res.render('index')
+    }
+    
   }
   static formRegis(req, res) {
     let error = req.query.error
@@ -87,10 +97,11 @@ class Controller {
   static profileShow(req, res) {
     let userId = req.params.userid
     let visitor = {
-      usename: req.session.userUsername,
+      username: req.session.userUsername,
       id: req.session.userId,
       role: req.session.userRole
     }
+    // console.log(visitor);
     Profile.findOne({where: {UserId:userId}})
       .then(result=>{
         res.render('profileView', {result, visitor, userId})
@@ -102,7 +113,7 @@ class Controller {
 
   static formProfile(req, res) {
     let visitor = {
-      usename: req.session.userUsername,
+      username: req.session.userUsername,
       id: req.session.userId,
       role: req.session.userRole
     }
