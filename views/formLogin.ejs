@@ -5,30 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <style>
+        body{
+            display: flex;
+            background-color: rgb(245, 212, 212);
+            justify-content: center;
+            align-items: center;
+            color: dimgray;
+        }
+
+        .container{
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 100px;
+        }
+        form{
+            text-align: left;
+        }
+        button {
+            border-radius: 5px;
+            background-color: rgb(204, 246, 247);
+            color: rgb(27, 27, 27);
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>LOGIN FORM</h1>
+    <div class="container">
+        <h1>LOGIN FORM</h1>
 
-    <%if (error) {%>
-        <p style="color: red;"><%=error%></p>
-    <%}%>
-    <!-- FORM -->
-    <form action="/login" method="post">
-        <div>
-            <label for="username">Username</label>
-            <input type="text" name="username">
-        </div>
-        <div>
-            <label for="email">Email</label>
-            <input type="text" name="email">
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" name="password">
-        </div>
-        <button type="submit">Login</button>
-    </form>
+        <%if (error) {%>
+            <p style="color: red;"><%=error%></p>
+        <%}%>
+        <!-- FORM -->
+        <form action="/login" method="post">
+            <div>
+                <label for="username">Username</label>
+                <input type="text" name="username">
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="text" name="email">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" name="password">
+            </div>
+            <button type="submit">Login</button>
+        </form>
 
-    <p>don't have account? <a href="/register"><button>Register Now</button></a></p>
+        <p>don't have account? <a href="/register"><button>Register Now</button></a></p>
+    </div>
+    
 </body>
 </html>

@@ -9,19 +9,65 @@
         table, th, td {
             border: 1px solid black;
         }
+        
         img{
             width: 150px;
+        }
+
+        body{
+            display: flex;
+            background-color: rgb(245, 212, 212);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container{
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 100px;
+        }
+        form{
+            text-align: left;
+        }
+        table{
+            margin-top: 25px;
+        }
+        button {
+            border-radius: 5px;
+            background-color: rgb(204, 246, 247);
+            color: rgb(27, 27, 27);
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        a{
+            text-decoration: none;
+            color: dimgray;
+            
+        }
+        
+        .nav{
+            margin-right: 30px;
+            
+        }
+        h1{
+            color: dimgray;
+        }
+        .atThis{
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
+    <div>
     <!-- NAVBAR -->
     <nav>
         <h1>Beauty Store</h1>
-        <a href="/">Home</a>
-        <a href="/user/<%=visitor.id%>/addProduct"><button>Add Product</button></a>
-        <a href="/user/<%=visitor.id%>/profile"><button>Profile</button></a>
-        <a href="/logout">Log out</a>
+        <hr>
+        <a class="nav atThis" href="/">Home</a>
+        <a class="nav" href="/user/<%=visitor.id%>/addProduct">Add Product</a>
+        <a class="nav" href="/user/<%=visitor.id%>/profile">Profile</a>
+        <a class="nav" href="/logout">Log out</a>
     </nav>
 
     <!-- Preference -->
@@ -86,6 +132,6 @@
     <%} else {%>
         <p>Data tidak ditemukan</p>
     <%}%>%>
-    
+    </div>
 </body>
 </html>

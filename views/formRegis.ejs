@@ -5,9 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <style>
+        body{
+            display: flex;
+            background-color: rgb(245, 212, 212);
+            justify-content: center;
+            align-items: center;
+            color: dimgray;
+        }
+
+        .container{
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 100px;
+        }
+        form{
+            text-align: left;
+        }
+        button {
+            border-radius: 5px;
+            background-color: rgb(204, 246, 247);
+            color: rgb(27, 27, 27);
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>REGISTRATION FORM</h1>
+    <div class="container">
+        <h1>REGISTRATION FORM</h1>
 
     <%if (error){%>
         <p style="color: red;"><%=error%></p>
@@ -38,5 +65,7 @@
         <button type="submit">Submit</button>
     </form>
     <p>already has an account? <a href="/login"><button>Login</button></a></p>
+    </div>
+    
 </body>
 </html>

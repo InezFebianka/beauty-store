@@ -7,20 +7,62 @@
     <title>Detail Product</title>
     <style>
         #productName{
-            font-size: 3rem;
+            font-size: 2rem;
         }
         img{
             border: 1px solid black;
             width: 150px;
         }
+        body{
+            display: flex;
+            background-color: rgb(245, 212, 212);
+            justify-content: center;
+            align-items: center;
+            color: dimgray;
+        }
+
+        .container{
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 100px;
+        }
+        form{
+            text-align: left;
+        }
+        button {
+            border-radius: 5px;
+            background-color: rgb(204, 246, 247);
+            color: rgb(27, 27, 27);
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        
+        a{
+            text-decoration: none;
+            color: dimgray;
+            
+        }
+        
+        .nav{
+            margin-right: 30px;
+            
+        }
+        h1{
+            color: dimgray;
+        }
     </style>
 </head>
 <body>
+    <div>
     <!-- NAVBAR -->
     <nav>
         <h1>Beauty Store</h1>
-        <a href="/product">All Product</a>
-        <!-- link mengarah ke profil;jika login ATAU link yang mengarah keform login jika tdk login -->
+        <hr>
+        <a class="nav" href="/">Home</a>
+        <a class="nav" href="/user/<%=visitor.id%>/addProduct">Add Product</a>
+        <a class="nav" href="/user/<%=visitor.id%>/profile">Profile</a>
+        <a class="nav" href="/logout">Log out</a>
     </nav>
 
     <!-- DETAIL PRODUCT -->
@@ -32,10 +74,12 @@
         <img src="<%=result.imageUrl%>" alt="pic of <%=result.name%>">
         <p>Price: <%=result.formatPrice()%></p>
         <p>Category: <%=result.Category.name%></p>
-        
-        <p>THIS PAGE QR CODE: <img src="<%= qr_code.source %>" alt="QR CODE"></p>
+        <br>
+        <p>THIS PAGE QR CODE:</p> 
+        <img src="<%= qr_code.source %>" alt="QR CODE"><br>
         <a href="/user/<%=result.User.id%>/profile"><button>See Seller</button></a>
         
     </section>
+    </div>
 </body>
 </html>
