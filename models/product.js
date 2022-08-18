@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const formatedPrice = require('../helper/formatedPrice')
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
@@ -13,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Product.belongsTo(models.Category)
       Product.belongsTo(models.User)
+    }
+
+    formatPrice(){
+      return formatedPrice(this.price)
     }
   }
   Product.init({

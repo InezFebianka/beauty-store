@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+        img{
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <h1>Beauty Store</h1>
+        <a href="/">Home</a>
+        <a href="/user/:userid/addProduct"><button>Add Product</button></a>
+        <a href="/user/:userid/profile"><button>Profile</button></a>
+        <a href="/logout">Log out</a>
+    </nav>
+
+    <!-- TABLE PRODUCT -->
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>description</th>
+                <th>price</th>
+                <th>images</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%result.forEach(el=>{%>
+            <tr>
+                <td><%=el.id%></td>
+                <td><%=el.name%></td>
+                <td><%=el.desc%></td>
+                <td><%=el.formatPrice()%></td>
+                <td><img src="<%=el.imageUrl%>" alt="pic of <%=el.name%>"></td>
+                <td>
+                    <a href="productDetail/<%=el.id%>"><button>See Detail</button></a>
+                    <!-- action edit jika login as seller dengan user id match -->
+                    <a href="/product/<%=el.id%>/editProduct"><button>Edit</button></a>
+
+                    <!-- action delete jika login as admin -->
+                    <a href="/product/<%=el.id%>/deleteProduct"><button>Delete</button></a>
+                </td>
+            </tr>  
+            <%})%>
+            
+        </tbody>
+    </table>
+</body>
+</html>
