@@ -50,7 +50,7 @@ class ProductController{
             .then(result=>{
                 qrcode.toDataURL(`/productDetail/${targetedId}`, (err, src)=>{
                     let qr_code = {source: src}
-                    res.render('productDetail', {result, qr_code})
+                    res.render('productDetail', {result, qr_code, visitor})
                 })
                 
             })
@@ -114,6 +114,11 @@ class ProductController{
     }
 
     static formEditProduct(req, res)  {
+        let visitor = {
+            username: req.session.userUsername,
+            id: req.session.userId,
+            role: req.session.userRole
+        }
         let targetedId = req.params.productId
         Product.findByPk(targetedId)
             .then(result=>{
@@ -123,7 +128,7 @@ class ProductController{
                         User.getAllSeller()
                             .then(allSeller=>{
                                 // console.log(allSeller);
-                                res.render('formEditProduct', {result, allCat, allSeller})
+                                res.render('formEditProduct', {result, allCat, allSeller, visitor})
                     })
                 })     
             })
