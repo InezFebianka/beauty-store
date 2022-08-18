@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Product</title>
+    <style>
+        #productName{
+            font-size: 3rem;
+        }
+        img{
+            border: 1px solid black;
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <h1>Beauty Store</h1>
+        <a href="/product">All Product</a>
+        <!-- link mengarah ke profil;jika login ATAU link yang mengarah keform login jika tdk login -->
+    </nav>
+
+    <!-- DETAIL PRODUCT -->
+    
+    <section>
+        <p id="productName"><%=result.name%></p>
+
+        <p>Sell by: <%=result.User.username%></p>
+        <img src="<%=result.imageUrl%>" alt="pic of <%=result.name%>">
+        <p>Price: <%=result.formatPrice()%></p>
+        <p>Category: <%=result.Category.name%></p>
+        
+        <p>THIS PAGE QR CODE: <img src="<%= qr_code.source %>" alt="QR CODE"></p>
+        <a href="/user/<%=result.User.id%>/profile"><button>See Seller</button></a>
+        
+    </section>
+</body>
+</html>

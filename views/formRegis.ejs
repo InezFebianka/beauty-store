@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <h1>REGISTRATION FORM</h1>
+
+    <%if (error){%>
+        <p style="color: red;"><%=error%></p>
+    <%}%>
+
+    <!-- FORM -->
+    <form action="/register" method="post">
+        <div>
+            <label for="username">Username</label>
+            <input type="text" name="username">
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="text" name="email">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password">
+        </div>
+        <div>
+            <label for="role">Role</label>
+            <select name="role" id="">
+                <option disabled selected>Select Role</option>
+                <option value="admin">Admin</option>
+                <option value="seller">Seller</option>
+            </select>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <p>already has an account? <a href="/login"><button>Login</button></a></p>
+</body>
+</html>

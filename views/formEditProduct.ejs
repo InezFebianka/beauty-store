@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <h1>Beauty Store</h1>
+        <a href="/">Home</a>
+        <!-- link mengarah ke profil -->
+    </nav>
+
+    <!-- FORM -->
+
+    <form action="/product/<%=result.id%>/editProduct" method="post">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" value="<%=result.name%>">
+        </div>
+        <div>
+            <label for="desc">Description</label>
+            <input type="text" name="desc" id="desc" value="<%=result.desc%>">
+        </div>
+        <div>
+            <label for="price">Price</label>
+            <input type="number" name="price" id="price" value="<%=result.price%>">
+        </div>
+        <div>
+            <label for="imageUrl">Image URL</label>
+            <input type="imageUrl" name="imageUrl" id="imageUrl" value="<%=result.imageUrl%>">
+        </div>
+        <div>
+            <label for="CategoryId">Category</label>
+            <select name="CategoryId" id="CategoryId">
+                <%allCat.forEach(el=>{%>
+                    <%if(el.id === result.CategoryId){%>
+                        <option value="<%=el.id%>" selected><%=el.name%></option>
+                    <%} else {%>
+                        <option value="<%=el.id%>"><%=el.name%></option>
+                    <%}%>
+                    
+                <%})%>
+            </select>
+        </div>
+        <div>
+            <label for="UserId">Seller</label>
+            <select name="UserId" id="">
+                <%allSeller.forEach(el=>{%>
+                    <%if(el.id === result.UserId){%>
+                        <option value="<%= el.id %>" selected><%= el.username %></option>
+                    <%} else {%>
+                        <option value="<%= el.id %>"><%= el.username %></option>
+                    <%}%>
+                <%})%>
+            </select>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

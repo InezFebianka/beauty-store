@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Category.hasMany(models.Product)
     }
+
+    static allCategory(){
+      return Category.findAll()
+    }
   }
   Category.init({
     name: DataTypes.STRING
